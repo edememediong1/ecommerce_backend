@@ -2,6 +2,7 @@ const errorHandler = (err, req, res, next) => {
     console.log(err.stack); // logs the error for debugging
 
     // If no status was set earlier, default to 500 (server error)
+    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
 
     res.status(statusCode).json({
         success: false,
