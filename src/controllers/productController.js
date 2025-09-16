@@ -10,16 +10,18 @@ exports.createProduct = async (req, res, next) => {
     try {
         const {name, description, price, stock, category} = req.body;
 
+       let categoryDoc = await Category.findOne({ name: category}) 
+        
         // Upload image to cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path, { folder: 'products'})
-
+        const result = await cloudinary.uploader.upload(req.file.path, { folder: 'products'}) 
+        
         const product = await Product.create({
             name,
             description,
             price,
             stock, 
             imageUrl: result.secure_url,
-            category,
+            category: categoryDoc._id,
             createdBy: req.user.id
         });
 

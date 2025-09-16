@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
+const cartRoutes = require('./routes/cartRoutes')
 const errorHandler = require('./middlewares/errorMiddleware')
 
 const app = express();
@@ -19,7 +20,8 @@ app.use(morgan('dev'))
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
-app.use('/api/products', productRoutes)
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes)
 
 // Error Handler Middleware 
 app.use(errorHandler)
